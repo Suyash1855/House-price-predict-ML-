@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Force dark color scheme so browser never injects light defaults */
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Hardcoded dark background — never relies on Tailwind class scanning */
+html, body {
+  background-color: #0f172a;
+  color: #e2e8f0;
+  min-height: 100vh;
+}
+
+#root {
+  background-color: #0f172a;
+  min-height: 100vh;
+}
+
+/* Hide number input spinners for clean look */
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+/* Animated gradient background for hero — opaque dark base */
+.hero-gradient {
+  background:
+    radial-gradient(ellipse at 30% 0%, rgba(59, 130, 246, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 100%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
+    #0f172a;
+}
+
+/* Subtle grid pattern overlay */
+.grid-pattern {
+  background-image: linear-gradient(rgba(148, 163, 184, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Glow effect behind price */
+.price-glow {
+  text-shadow: 0 0 40px rgba(59, 130, 246, 0.3), 0 0 80px rgba(139, 92, 246, 0.15);
+}
+
+/* Tooltip styles */
+.tooltip-trigger:hover + .tooltip-content {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
