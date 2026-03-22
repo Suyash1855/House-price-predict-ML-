@@ -1,14 +1,14 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
-  envPrefix: 'REACT_APP_',
+  envPrefix: "REACT_APP_",
   server: {
     port: 5173,
     proxy: {
-      '/predict': {
-        target: 'http://localhost:8000',
+      "/predict": {
+        target: "https://house-price-predict-ml.onrender.com",
         changeOrigin: true,
       },
     },

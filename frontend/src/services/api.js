@@ -2,12 +2,14 @@
  * API service for communicating with the House Price Prediction backend.
  * Uses axios to make HTTP requests to the FastAPI server.
  */
-import axios from 'axios';
+import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: import.meta.env.REACT_APP_API_URL || '',
+  baseURL:
+    import.meta.env.REACT_APP_API_URL ||
+    "https://house-price-predict-ml.onrender.com",
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
   timeout: 15000,
 });
@@ -29,11 +31,13 @@ export const predict = async (formData) => {
       avg_area_income: parseFloat(formData.avg_area_income),
       avg_area_house_age: parseFloat(formData.avg_area_house_age),
       avg_area_number_of_rooms: parseFloat(formData.avg_area_number_of_rooms),
-      avg_area_number_of_bedrooms: parseFloat(formData.avg_area_number_of_bedrooms),
+      avg_area_number_of_bedrooms: parseFloat(
+        formData.avg_area_number_of_bedrooms
+      ),
       area_population: parseFloat(formData.area_population),
     };
 
-    const response = await apiClient.post('/predict', payload);
+    const response = await apiClient.post("/predict", payload);
     return response.data;
   } catch (error) {
     if (error.response) {
@@ -42,17 +46,21 @@ export const predict = async (formData) => {
 
       if (status === 422) {
         throw new Error(
-          `Validation error: ${detail || 'Please check your input values and try again.'}`
+          `Validation error: ${
+            detail || "Please check your input values and try again."
+          }`
         );
       }
       throw new Error(
-        `Server error (${status}): ${detail || 'An unexpected error occurred on the server.'}`
+        `Server error (${status}): ${
+          detail || "An unexpected error occurred on the server."
+        }`
       );
     }
 
     if (error.request) {
       throw new Error(
-        'Network error: Unable to reach the prediction server. Please check your connection and try again.'
+        "Network error: Unable to reach the prediction server. Please check your connection and try again."
       );
     }
 
